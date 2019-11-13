@@ -40,6 +40,14 @@ def logic_opt(img1, img2):
     return cv.bitwise_and(img1, img2), cv.bitwise_not(img1, img2),\
          cv.bitwise_or(img1, img2), cv.bitwise_xor(img1, img2)
 
+
+# 调整图像的亮度, C表示对比度，b表示亮度
+# alpha通道对应的是对比度？？？
+def contrast_brightness(img, c, b):
+    height, width, channel = img.shape
+    blank = np.zeros([height, width, channel], img.dtype)
+    return cv.addWeighted(img, c, blank, 1-c, b)
+
 if __name__ == '__main__':
     wlogo = cv.imread('data/WindowsLogo.jpg')
     llogo = cv.imread('data/LinuxLogo.jpg')
@@ -53,11 +61,14 @@ if __name__ == '__main__':
     cv.imshow('mean opt', img_mean)
     print('%r,\n %r'%(_mean, _std))
 
-    and_, not_, or_, xor_ = logic_opt(llogo, wlogo)
-    cv.imshow('and opt', and_)
-    cv.imshow('not opt', not_)
-    cv.imshow('or opt', or_)
-    cv.imshow('xor opt', xor_)
+    cv.imshow('bright', contrast_brightness(wlogo, 0.8, 0))
+
+    #and_, not_, or_, xor_ = logic_opt(llogo, wlogo)
+    #cv.imshow('and opt', and_)
+    #cv.imshow('not opt', not_)
+    #cv.imshow('or opt', or_)
+    #cv.imshow('xor opt', xor_)
+
 
     cv.waitKey(0)
     cv.destroyAllWindows()

@@ -23,6 +23,7 @@ def extract_obj():
         if not ret:
             print('Cannot receive, exit....')
             break
+        frame = cv.flip(frame, 1)
         cv.imshow('video', frame)
 
         # 颜色提取，提取绿色的信息
