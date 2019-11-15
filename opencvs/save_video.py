@@ -5,9 +5,13 @@ import cv2 as cv
 
 cap = cv.VideoCapture(0)
 
-fourcc = cv.VideoWriter_fourcc(*'DIVX')
-output = cv.VideoWriter('output.avi', fourcc, 20.0, (640, 480))
+# 设置镜头分辨率
+cap.set(cv.CAP_PROP_FRAME_WIDTH,1280)
+cap.set(cv.CAP_PROP_FRAME_HEIGHT,720)
 
+fourcc = cv.VideoWriter_fourcc(*'DIVX')
+# 20表示视频的帧率
+output = cv.VideoWriter('output.avi', fourcc, 20.0, (1280, 720))
 
 while cap.isOpened():
     ret, frame = cap.read()
