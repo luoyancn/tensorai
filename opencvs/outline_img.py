@@ -38,7 +38,7 @@ def binary_contours(img):
     _contours, heriachy = cv.findContours(
         edge_output, cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE)
     for i, _ in enumerate(_contours):
-        cv.drawContours(img, _contours, i, (0,0,255), -1)
+        cv.drawContours(img, _contours, i, (0,0,255), 2)
 
 
 if __name__ == '__main__':
