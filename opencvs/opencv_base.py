@@ -5,6 +5,7 @@
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
+from PIL import Image
 
 
 def show_img(img, name, showall=True):
@@ -50,7 +51,9 @@ if __name__ == '__main__':
     # 常数填充
     constant = cv.copyMakeBorder(rgb_img, top,
                                  bottom, left, right,
-                                 borderType=cv.BORDER_CONSTANT, value=0)
+                                 borderType=cv.BORDER_CONSTANT, value=[0, 0, 255])
+    cv.imshow('constant', constant)
+    # PIL的形状是[h, w, rgb], 不是opencv的[h, w, bgr]
     plt.subplot(231)
     plt.imshow(rgb_img, 'gray')
     plt.title('ORIGINAL')
@@ -70,6 +73,17 @@ if __name__ == '__main__':
     plt.imshow(constant, 'gray')
     plt.title('constant')
     plt.show()
+
+    football = cv.imread('data/messi5.jpg')
+    ball = football[280:340,330:390,:]
+    football[273:333, 100:160] = ball
+    cv.imshow('double', football)
+
+    # 图像融合，使用addWeighted函数，必须是相同shape的才可以进行操作
+    img1 = cv.imread('data/WindowsLogo.jpg')
+    img2 = cv.imread('data/LinuxLogo.jpg')
+    dest = cv.addWeighted(img1, 0.7, img2, 0.3, 0)
+    cv.imshow('Blending', dest)
 
     cv.waitKey(0)
     cv.destroyAllWindows()
