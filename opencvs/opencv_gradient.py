@@ -33,6 +33,7 @@ for i, kv in enumerate(zip(titles, images)):
     plt.yticks([])
 plt.show()
 
+# scharr算子
 scharrrx = cv.Scharr(src, cv.CV_64F, 1, 0)
 scharrrx = cv.convertScaleAbs(scharrrx)
 scharrry = cv.Scharr(src, cv.CV_64F, 0, 1)
