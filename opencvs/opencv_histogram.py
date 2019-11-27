@@ -38,5 +38,19 @@ for i, col in enumerate(('c','y', 'm')):
 
 plt.show()
 
+# 原始的灰度图的直方图
+plt.hist(gray.ravel(), 256)
+plt.show()
+# 直方图均衡化
+equ = cv.equalizeHist(gray)
+plt.hist(equ.ravel(), 256)
+plt.show()
+cv.imshow('gray_vs_equ', np.hstack((gray, equ)))
+
+# 自适应直方图均衡化
+clahe = cv.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+res_clahe = clahe.apply(gray)
+cv.imshow('gray_vs_equ', np.hstack((gray, equ, res_clahe)))
+
 cv.waitKey(0)
 cv.destroyAllWindows()

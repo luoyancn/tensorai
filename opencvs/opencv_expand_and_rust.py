@@ -38,6 +38,10 @@ cv.imshow('final_all', final)
 gradient = cv.morphologyEx(src, cv.MORPH_GRADIENT, kernel)
 cv.imshow('gradient', gradient)
 
+_gradient = cv.morphologyEx(opening, cv.MORPH_GRADIENT, kernel)
+__gradient = cv.dilate(_gradient, kernel, iterations=1)
+cv.imshow('_gradient', __gradient)
+
 # 顶帽（礼帽）：原始输入-开运算结果
 tophat = cv.morphologyEx(src, cv.MORPH_TOPHAT, kernel)
 cv.imshow('tophat', tophat)
